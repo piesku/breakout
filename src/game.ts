@@ -1,6 +1,7 @@
 import {GameState} from "./actions.js";
 import {Blueprint2D} from "./blueprints/blu_common.js";
 import {AudioSource} from "./components/com_audio_source.js";
+import {Collide} from "./components/com_collide.js";
 import {ControlBall} from "./components/com_control_ball.js";
 import {ControlPaddle} from "./components/com_control_paddle.js";
 import {Draw} from "./components/com_draw.js";
@@ -10,6 +11,7 @@ import {Named} from "./components/com_named.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
 import {Vec4} from "./math/index.js";
 import {sys_audio} from "./systems/sys_audio.js";
+import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_ball} from "./systems/sys_control_ball.js";
 import {sys_control_paddle} from "./systems/sys_control_paddle.js";
 import {sys_draw2d} from "./systems/sys_draw2d.js";
@@ -41,6 +43,7 @@ export class Game implements ComponentData, GameState {
 
     // Implement ComponentData
     public [Get.AudioSource]: Array<AudioSource> = [];
+    public [Get.Collide]: Array<Collide> = [];
     public [Get.ControlBall]: Array<ControlBall> = [];
     public [Get.ControlPaddle]: Array<ControlPaddle> = [];
     public [Get.Draw]: Array<Draw> = [];
@@ -111,6 +114,7 @@ export class Game implements ComponentData, GameState {
         sys_control_ball(this, delta);
         sys_move(this, delta);
         sys_transform2d(this, delta);
+        sys_collide(this, delta);
         sys_audio(this, delta);
         sys_draw2d(this, delta);
         sys_ui(this, delta);

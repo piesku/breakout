@@ -9,3 +9,9 @@ export function distance(a: Vec2, b: Vec2) {
     let y = b[1] - a[1];
     return Math.hypot(x, y);
 }
+
+export function negate(out: Vec2, a: Vec2) {
+    out[0] = -a[0];
+    out[1] = -a[1];
+    return out;
+}

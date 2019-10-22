@@ -1,4 +1,5 @@
 import {AudioSource} from "./com_audio_source";
+import {Collide} from "./com_collide";
 import {ControlBall} from "./com_control_ball";
 import {ControlPaddle} from "./com_control_paddle";
 import {Draw} from "./com_draw";
@@ -8,6 +9,7 @@ import {Transform2D} from "./com_transform2d";
 
 export const enum Get {
     AudioSource,
+    Collide,
     ControlBall,
     ControlPaddle,
     Draw,
@@ -18,6 +20,7 @@ export const enum Get {
 
 export interface ComponentData {
     [Get.AudioSource]: Array<AudioSource>;
+    [Get.Collide]: Array<Collide>;
     [Get.ControlBall]: Array<ControlBall>;
     [Get.ControlPaddle]: Array<ControlPaddle>;
     [Get.Draw]: Array<Draw>;
@@ -28,6 +31,7 @@ export interface ComponentData {
 
 export const enum Has {
     AudioSource = 1 << Get.AudioSource,
+    Collide = 1 << Get.Collide,
     ControlBall = 1 << Get.ControlBall,
     ControlPaddle = 1 << Get.ControlPaddle,
     Draw = 1 << Get.Draw,

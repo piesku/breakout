@@ -1,7 +1,7 @@
 import {Get, Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
 
-const QUERY = Has.Transform2D | Has.ControlBall | Has.Move;
+const QUERY = Has.Transform2D | Has.ControlBall | Has.Move | Has.Collide;
 
 export function sys_control_ball(game: Game, delta: number) {
     for (let i = 0; i < game.World.length; i++) {
@@ -14,6 +14,7 @@ export function sys_control_ball(game: Game, delta: number) {
 function update(game: Game, entity: Entity) {
     let transform = game[Get.Transform2D][entity];
     let move = game[Get.Move][entity];
+    let collide = game[Get.Collide][entity];
 
     if (transform.Translation[0] < 0) {
         transform.Translation[0] = 0;
@@ -33,5 +34,13 @@ function update(game: Game, entity: Entity) {
     if (transform.Translation[1] > game.ViewportHeight) {
         transform.Translation[1] = game.ViewportHeight;
         move.Direction[1] = -move.Direction[1];
+    }
+
+    if (collide.Collisions.length > 0) {
+        let collision = collide.Collisions[0];
+        if (collision.Hit[1] < 0) {
+            transform.Translation[1] += collision.Hit[1];
+            move.Direction[1] = -move.Direction[1];
+        }
     }
 }
