@@ -1,5 +1,4 @@
 import {GameState} from "../actions.js";
-import {ColorToggle} from "./ColorToggle.js";
 import {html} from "./html.js";
 
 export function App(state: GameState) {
@@ -11,8 +10,6 @@ export function App(state: GameState) {
                 background-color: #000;
                 color: #fff;
             "
-        >
-            ${ColorToggle()}
-        </div>
+        ></div>
     `;
 }
