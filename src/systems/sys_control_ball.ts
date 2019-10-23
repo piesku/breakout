@@ -1,5 +1,6 @@
 import {Get, Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
+import {normalize} from "../math/vec2.js";
 
 const QUERY = Has.Transform2D | Has.ControlBall | Has.Move | Has.Collide;
 
@@ -40,11 +41,18 @@ function update(game: Game, entity: Entity) {
         let collision = collide.Collisions[0];
         if (collision.Hit[0]) {
             transform.Translation[0] += collision.Hit[0];
+            let from_center = collide.Center[1] - collision.Other.Center[1];
+            let other_half = collision.Other.Size[1] / 2;
             move.Direction[0] = -move.Direction[0];
+            move.Direction[1] = from_center / other_half;
         }
         if (collision.Hit[1]) {
             transform.Translation[1] += collision.Hit[1];
+            let from_center = collide.Center[0] - collision.Other.Center[0];
+            let other_half = collision.Other.Size[0] / 2;
+            move.Direction[0] = from_center / other_half;
             move.Direction[1] = -move.Direction[1];
         }
+        normalize(move.Direction, move.Direction);
     }
 }
