@@ -13,6 +13,7 @@
     "scripts": {
         "compile": "tsc",
         "compile:watch": "tsc --watch -p .",
+        "deploy": "npx gh-pages -d ./public/",
         "lint": "prettier --check \"src/**/*.ts\"",
         "pretty": "prettier --write \"src/**/*.ts\"",
         "serve": "live-server --port=1234 --no-browser --quiet public",
