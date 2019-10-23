@@ -5,6 +5,10 @@ import {Blueprint2D} from "./blu_common.js";
 
 export function create_brick(width: number, height: number) {
     return <Blueprint2D>{
-        Using: [control_brick(), collide(true, [width, height]), draw_rect(width, height, "green")],
+        Using: [
+            control_brick(),
+            collide(false, [width, height]),
+            draw_rect(width, height, "green"),
+        ],
     };
 }

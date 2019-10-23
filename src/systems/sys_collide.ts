@@ -32,7 +32,7 @@ export function sys_collide(game: Game, delta: number) {
     }
 
     for (let i = 0; i < dynamic_colliders.length; i++) {
-        //check_collisions(dynamic_colliders[i], static_colliders, static_colliders.length);
+        check_collisions(dynamic_colliders[i], static_colliders, static_colliders.length);
         check_collisions(dynamic_colliders[i], dynamic_colliders, i);
     }
 }
