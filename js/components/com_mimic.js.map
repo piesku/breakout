@@ -1,0 +1,1 @@
+{"version":3,"file":"com_mimic.js","sourceRoot":"","sources":["../../../src/components/com_mimic.ts"],"names":[],"mappings":"AAUA,MAAM,UAAU,KAAK,CAAC,MAAc,EAAE,YAAoB,GAAG;IACzD,OAAO,CAAC,IAAU,EAAE,MAAc,EAAE,EAAE;QAClC,IAAI,CAAC,KAAK,CAAC,MAAM,CAAC,mBAAa,CAAC;QAChC,IAAI,eAAW,CAAC,MAAM,CAAC,GAAU;YAC7B,MAAM;YACN,SAAS;SACZ,CAAC;IACN,CAAC,CAAC;AACN,CAAC"}
