@@ -16,8 +16,12 @@ function update(game: Game, entity: Entity) {
     let control = game[Get.ControlPaddle][entity];
 
     let x = transform.Translation[0] + game.InputEvent.mouse_x;
-    if (control.Width / 2 < x && x < game.ViewportWidth - control.Width / 2) {
+    if (x < control.Width / 2) {
+        transform.Translation[0] = control.Width / 2;
+    } else if (game.ViewportWidth - control.Width / 2 < x) {
+        transform.Translation[0] = game.ViewportWidth - control.Width / 2;
+    } else {
         transform.Translation[0] = x;
-        transform.Dirty = true;
     }
+    transform.Dirty = true;
 }
