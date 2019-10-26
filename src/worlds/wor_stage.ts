@@ -1,6 +1,7 @@
 import {ball_blueprint} from "../blueprints/blu_ball.js";
 import {create_brick} from "../blueprints/blu_brick.js";
 import {paddle_blueprint} from "../blueprints/blu_paddle.js";
+import {shake} from "../components/com_shake.js";
 import {Game} from "../game.js";
 
 export function world_stage(game: Game) {
@@ -27,7 +28,8 @@ export function world_stage(game: Game) {
         }
     }
 
-    let viewport_entity = game.Add({
+    game.Camera = game.Add({
+        Using: [shake()],
         Children: [
             {
                 Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],

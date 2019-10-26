@@ -64,6 +64,7 @@ export class Game implements ComponentData, GameState {
     public Audio: AudioContext = new AudioContext();
     public InputState: InputState = {mouse_x: 0, mouse_y: 0};
     public InputEvent: InputEvent = {mouse_x: 0, mouse_y: 0, wheel_y: 0};
+    public Camera: Entity = 0;
 
     // Implement GameState
     public ClearColor = <Vec4>[1, 0.3, 0.3, 1];
