@@ -9,6 +9,7 @@ import {Draw} from "./components/com_draw.js";
 import {ComponentData, Get, Has} from "./components/com_index.js";
 import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
+import {Shake} from "./components/com_shake.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
 import {Vec4} from "./math/index.js";
 import {sys_audio} from "./systems/sys_audio.js";
@@ -20,6 +21,7 @@ import {sys_draw2d} from "./systems/sys_draw2d.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_move} from "./systems/sys_move.js";
 import {sys_performance} from "./systems/sys_performance.js";
+import {sys_shake} from "./systems/sys_shake.js";
 import {sys_transform2d} from "./systems/sys_transform2d.js";
 import {sys_ui} from "./systems/sys_ui.js";
 
@@ -53,6 +55,7 @@ export class Game implements ComponentData, GameState {
     public [Get.Move]: Array<Move> = [];
     public [Get.Named]: Array<Named> = [];
     public [Get.Transform2D]: Array<Transform2D> = [];
+    public [Get.Shake]: Array<Shake> = [];
 
     public ViewportWidth = window.innerWidth;
     public ViewportHeight = window.innerHeight;
@@ -116,6 +119,7 @@ export class Game implements ComponentData, GameState {
         sys_control_paddle(this, delta);
         sys_control_ball(this, delta);
         sys_control_brick(this, delta);
+        sys_shake(this, delta);
         sys_move(this, delta);
         sys_transform2d(this, delta);
         sys_collide(this, delta);
