@@ -6,16 +6,6 @@ import {Game} from "../game.js";
 export function world_stage(game: Game) {
     game.World = [];
 
-    game.Add({
-        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
-        ...paddle_blueprint,
-    });
-
-    game.Add({
-        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 100],
-        ...ball_blueprint,
-    });
-
     let col_count = 5;
     let row_count = 5;
     let brick_width = 100;
@@ -25,14 +15,29 @@ export function world_stage(game: Game) {
     let top_left_x = (game.ViewportWidth - brick_width * col_count - padding * (col_count - 1)) / 2;
     let top_left_y = 100;
 
+    let bricks = [];
     for (let row = 0; row < row_count; row++) {
         let y = top_left_y + row * (brick_height + padding) + brick_height / 2;
         for (let col = 0; col < col_count; col++) {
             let x = top_left_x + col * (brick_width + padding) + brick_width / 2;
-            game.Add({
-                Translation: [x, y],
+            bricks.push({
+                Translation: [x, y] as [number, number],
                 ...create_brick(brick_width, brick_height),
             });
         }
     }
+
+    let viewport_entity = game.Add({
+        Children: [
+            {
+                Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
+                ...paddle_blueprint,
+            },
+            {
+                Translation: [game.ViewportWidth / 2, game.ViewportHeight - 100],
+                ...ball_blueprint,
+            },
+            ...bricks,
+        ],
+    });
 }
