@@ -37,6 +37,16 @@ function update(game: Game, entity: Entity) {
         move.Direction[1] = -move.Direction[1];
     }
 
+    // // -1 for absolute left of paddle, 0 for middle, +1 for absolute right
+    // fPaddleHit	= (pBall->fCurrentX - this->fPaddleHPosX) / this->fPaddleHSize * (float)0.9;
+    // // Our angle of attack
+    // fAngleIn	= atan2f(-pBall->fSrcSpeedX, pBall->fSrcSpeedY);
+    // // Calculate our defence angle
+    // fAngleOut	= fPaddleHit * ((float)(PI / 2) + fAngleIn * (fPaddleHit < 0 ? -1 : 1)) - fAngleIn;
+    // // Calculate speed vector based on our outgoing angle
+    // pBall->fSrcSpeedX = -pBall->fSrcSpeed * sinf(fAngleOut + (float)(PI));
+    // pBall->fSrcSpeedY = -pBall->fSrcSpeed * cosf(fAngleOut);
+
     if (collide.Collisions.length > 0) {
         let collision = collide.Collisions[0];
         if (collision.Hit[0]) {
@@ -53,6 +63,14 @@ function update(game: Game, entity: Entity) {
             move.Direction[0] = from_center / other_half;
             move.Direction[1] = -move.Direction[1];
         }
+
+        // let paddle_hit = transform.Translation[0] - (collision.Other.Center[0] / 20) * 0.9;
+        // let angle_in = Math.atan2(move.Direction[0], move.Direction[1]);
+        // let angle_out =
+        //     paddle_hit * (Math.PI / 2 + angle_in * (paddle_hit < 0 ? -1 : 1)) - angle_in;
+        // move.Direction[0] = -move.Speed * Math.sin(angle_out + Math.PI);
+        // move.Direction[1] = -move.Speed * Math.cos(angle_out);
+
         normalize(move.Direction, move.Direction);
     }
 }
