@@ -15,6 +15,11 @@ function update(game: Game, entity: Entity) {
     let transform = game[Get.Transform2D][entity];
     let control = game[Get.ControlPaddle][entity];
 
+    // game.Add({
+    //     ...get_blu_tail(100, 20, "red"),
+    //     Translation: [...transform.Translation] as [number, number],
+    // });
+
     let x = transform.Translation[0] + game.InputEvent.mouse_x;
     if (x < control.Width / 2) {
         transform.Translation[0] = control.Width / 2;
