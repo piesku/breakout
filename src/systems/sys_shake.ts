@@ -14,7 +14,6 @@ export function sys_shake(game: Game, delta: number) {
 function update(game: Game, entity: Entity, delta: number) {
     let shake = game[Get.Shake][entity];
 
-    console.log(shake, entity);
     if (shake.Duration > 0) {
         shake.Duration -= delta;
 

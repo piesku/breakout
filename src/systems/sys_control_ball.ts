@@ -1,4 +1,4 @@
-import {blu_tail} from "../blueprints/blu_tail.js";
+import {get_blu_tail} from "../blueprints/blu_tail.js";
 import {Get, Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
 import {normalize} from "../math/vec2.js";
@@ -60,7 +60,7 @@ function update(game: Game, entity: Entity) {
         normalize(move.Direction, move.Direction);
     }
     game.Add({
-        ...blu_tail,
+        ...get_blu_tail(20, 20, "rgb(255, 199, 0)"),
         Translation: [...transform.Translation] as [number, number],
     });
 }

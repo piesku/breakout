@@ -15,9 +15,12 @@ export function sys_fade(game: Game, delta: number) {
 function update(game: Game, entity: Entity, delta: number) {
     let fade = game[Get.Fade][entity];
     let draw = game[Get.Draw][entity] as DrawRect;
-
+    let transform = game[Get.Transform2D][entity];
     if (draw.Alpha > 0) {
         draw.Alpha -= fade.Step;
+        let current_step = draw.Alpha / fade.Step;
+        transform.Scale = [Math.max(0, draw.Alpha), Math.max(0, draw.Alpha)];
+        transform.Dirty = true;
 
         if (draw.Alpha <= 0) {
             game.Destroy(entity);
