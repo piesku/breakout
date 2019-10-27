@@ -29,7 +29,7 @@ export function world_stage(game: Game) {
     }
 
     game.Camera = game.Add({
-        Using: [shake()],
+        Using: [shake(0, 10)],
         Children: [
             {
                 Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],

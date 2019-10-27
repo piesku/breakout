@@ -18,7 +18,10 @@ function update(game: Game, entity: Entity, delta: number) {
         shake.Duration -= delta;
 
         let transform = game[Get.Transform2D][entity];
-        transform.Translation = [5 - Math.random() * 10, 5 - Math.random() * 10];
+        transform.Translation = [
+            shake.Strength - Math.random() * (shake.Strength * 2),
+            shake.Strength - Math.random() * (shake.Strength * 2),
+        ];
         transform.Dirty = true;
 
         if (shake.Duration <= 0) {
