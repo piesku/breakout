@@ -4,6 +4,7 @@ import {ControlBall} from "./com_control_ball";
 import {ControlBrick} from "./com_control_brick";
 import {ControlPaddle} from "./com_control_paddle";
 import {Draw} from "./com_draw";
+import {Fade} from "./com_fade";
 import {Move} from "./com_move";
 import {Named} from "./com_named";
 import {Shake} from "./com_shake";
@@ -20,6 +21,7 @@ export const enum Get {
     Named,
     Transform2D,
     Shake,
+    Fade,
 }
 
 export interface ComponentData {
@@ -33,6 +35,7 @@ export interface ComponentData {
     [Get.Named]: Array<Named>;
     [Get.Transform2D]: Array<Transform2D>;
     [Get.Shake]: Array<Shake>;
+    [Get.Fade]: Array<Fade>;
 }
 
 export const enum Has {
@@ -46,4 +49,5 @@ export const enum Has {
     Named = 1 << Get.Named,
     Transform2D = 1 << Get.Transform2D,
     Shake = 1 << Get.Shake,
+    Fade = 1 << Get.Fade,
 }
