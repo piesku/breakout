@@ -6,6 +6,7 @@ import {ControlBall} from "./components/com_control_ball.js";
 import {ControlBrick} from "./components/com_control_brick.js";
 import {ControlPaddle} from "./components/com_control_paddle.js";
 import {Draw} from "./components/com_draw.js";
+import {Fade} from "./components/com_fade.js";
 import {ComponentData, Get, Has} from "./components/com_index.js";
 import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
@@ -18,6 +19,7 @@ import {sys_control_ball} from "./systems/sys_control_ball.js";
 import {sys_control_brick} from "./systems/sys_control_brick.js";
 import {sys_control_paddle} from "./systems/sys_control_paddle.js";
 import {sys_draw2d} from "./systems/sys_draw2d.js";
+import {sys_fade} from "./systems/sys_fade.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_move} from "./systems/sys_move.js";
 import {sys_performance} from "./systems/sys_performance.js";
@@ -56,6 +58,7 @@ export class Game implements ComponentData, GameState {
     public [Get.Named]: Array<Named> = [];
     public [Get.Transform2D]: Array<Transform2D> = [];
     public [Get.Shake]: Array<Shake> = [];
+    public [Get.Fade]: Array<Fade> = [];
 
     public ViewportWidth = window.innerWidth;
     public ViewportHeight = window.innerHeight;
@@ -121,6 +124,7 @@ export class Game implements ComponentData, GameState {
         sys_control_ball(this, delta);
         sys_control_brick(this, delta);
         sys_shake(this, delta);
+        sys_fade(this, delta);
         sys_move(this, delta);
         sys_transform2d(this, delta);
         sys_collide(this, delta);
