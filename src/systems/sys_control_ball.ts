@@ -60,7 +60,7 @@ function update(game: Game, entity: Entity) {
         normalize(move.Direction, move.Direction);
     }
     game.Add({
-        ...get_blu_tail(20, 20, "rgb(255, 199, 0)"),
+        ...get_blu_tail(20, 20, "orange"),
         Translation: [...transform.Translation] as [number, number],
     });
 }

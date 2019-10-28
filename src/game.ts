@@ -13,7 +13,6 @@ import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
 import {Shake} from "./components/com_shake.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
-import {Vec4} from "./math/index.js";
 import {sys_audio} from "./systems/sys_audio.js";
 import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_ball} from "./systems/sys_control_ball.js";
@@ -73,7 +72,7 @@ export class Game implements ComponentData, GameState {
     public Camera: Entity = 0;
 
     // Implement GameState
-    public ClearColor = <Vec4>[1, 0.3, 0.3, 1];
+    public ClearColor: string = "white";
 
     private RAF: number = 0;
 

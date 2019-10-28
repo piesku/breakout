@@ -6,6 +6,7 @@ import {Game} from "../game.js";
 
 export function world_stage(game: Game) {
     game.World = [];
+    game.ClearColor = "black";
 
     let col_count = 5;
     let row_count = 5;
