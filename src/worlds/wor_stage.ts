@@ -23,7 +23,7 @@ export function world_stage(game: Game) {
             let x = top_left_x + col * (brick_width + padding) + brick_width / 2;
             bricks.push({
                 Translation: [x, y] as [number, number],
-                ...create_brick(brick_width, brick_height),
+                ...create_brick(brick_width, brick_height, x, y, 0.5 + Math.random()),
             });
         }
     }

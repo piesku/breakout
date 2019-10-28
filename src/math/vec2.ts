@@ -27,3 +27,11 @@ export function normalize(out: Vec2, a: Vec2) {
     out[1] = a[1] * len;
     return out;
 }
+
+export function lerp(out: Vec2, a: Vec2, b: Vec2, t: number) {
+    let ax = a[0];
+    let ay = a[1];
+    out[0] = ax + t * (b[0] - ax);
+    out[1] = ay + t * (b[1] - ay);
+    return out;
+}
