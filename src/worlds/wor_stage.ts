@@ -1,6 +1,6 @@
-import {ball_blueprint} from "../blueprints/blu_ball.js";
+import {get_ball_blueprint} from "../blueprints/blu_ball.js";
 import {create_brick} from "../blueprints/blu_brick.js";
-import {paddle_blueprint} from "../blueprints/blu_paddle.js";
+import {get_paddle_blueprint} from "../blueprints/blu_paddle.js";
 import {shake} from "../components/com_shake.js";
 import {Game} from "../game.js";
 
@@ -32,12 +32,10 @@ export function world_stage(game: Game) {
         Using: [shake(0, 10)],
         Children: [
             {
-                Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
-                ...paddle_blueprint,
+                ...get_paddle_blueprint(game),
             },
             {
-                Translation: [game.ViewportWidth / 2, game.ViewportHeight - 100],
-                ...ball_blueprint,
+                ...get_ball_blueprint(game),
             },
             ...bricks,
         ],
