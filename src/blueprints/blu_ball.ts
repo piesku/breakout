@@ -13,7 +13,7 @@ export let get_ball_blueprint = function(game: Game) {
         Translation: [x, y],
         Using: [
             control_ball(),
-            move(75, 500),
+            move(Math.PI * 1.75, 500),
             collide(true, [20, 20]),
             draw_rect(20, 20, "orange"),
         ],

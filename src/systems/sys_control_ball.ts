@@ -1,3 +1,4 @@
+import {get_blu_explosion} from "../blueprints/blu_explosion.js";
 import {get_blu_tail} from "../blueprints/blu_tail.js";
 import {Get, Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
@@ -58,6 +59,10 @@ function update(game: Game, entity: Entity) {
         }
 
         normalize(move.Direction, move.Direction);
+
+        game.Add(
+            get_blu_explosion(transform.Translation[0], transform.Translation[1], "white", 15)
+        );
     }
     game.Add({
         ...get_blu_tail(20, 20, "orange"),
