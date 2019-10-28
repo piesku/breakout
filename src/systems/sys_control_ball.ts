@@ -1,3 +1,4 @@
+import {get_blu_tail} from "../blueprints/blu_tail.js";
 import {Get, Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
 import {normalize} from "../math/vec2.js";
@@ -38,6 +39,8 @@ function update(game: Game, entity: Entity) {
     }
 
     if (collide.Collisions.length > 0) {
+        game[Get.Shake][game.Camera].Duration = 0.2;
+
         let collision = collide.Collisions[0];
         if (collision.Hit[0]) {
             transform.Translation[0] += collision.Hit[0];
@@ -53,6 +56,11 @@ function update(game: Game, entity: Entity) {
             move.Direction[0] = from_center / other_half;
             move.Direction[1] = -move.Direction[1];
         }
+
         normalize(move.Direction, move.Direction);
     }
+    game.Add({
+        ...get_blu_tail(20, 20, "rgb(255, 199, 0)"),
+        Translation: [...transform.Translation] as [number, number],
+    });
 }

@@ -75,3 +75,9 @@ export function ease_in_out_circ(t: number) {
         ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2
         : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2;
 }
+
+export function ease_in_out_elastic(t: number) {
+    return (t -= 0.5) < 0
+        ? (0.02 + 0.01 / t) * Math.sin(50 * t)
+        : (0.02 - 0.01 / t) * Math.sin(50 * t) + 1;
+}

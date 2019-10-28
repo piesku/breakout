@@ -28,9 +28,10 @@ export interface DrawRect {
     Width: number;
     Height: number;
     Color: string;
+    Alpha: number;
 }
 
-export function draw_rect(Width: number, Height: number, Color: string) {
+export function draw_rect(Width: number, Height: number, Color: string, Alpha: number = 1) {
     return (game: Game, entity: Entity) => {
         game.World[entity] |= Has.Draw;
         game[Get.Draw][entity] = <DrawRect>{
@@ -38,6 +39,7 @@ export function draw_rect(Width: number, Height: number, Color: string) {
             Width,
             Height,
             Color,
+            Alpha,
         };
     };
 }
