@@ -41,17 +41,18 @@ function update(game: Game, entity: Entity) {
         let collision = collide.Collisions[0];
         if (collision.Hit[0]) {
             transform.Translation[0] += collision.Hit[0];
-            let from_center = collide.Center[1] - collision.Other.Center[1];
-            let other_half = collision.Other.Size[1] / 2;
             control.Direction[0] = -control.Direction[0];
-            control.Direction[1] = from_center / other_half;
         }
         if (collision.Hit[1]) {
             transform.Translation[1] += collision.Hit[1];
-            let from_center = collide.Center[0] - collision.Other.Center[0];
-            let other_half = collision.Other.Size[0] / 2;
-            control.Direction[0] = from_center / other_half;
             control.Direction[1] = -control.Direction[1];
+        }
+        if (game.World[collision.Other.EntityId] & Has.Move) {
+            let move = game[Get.Move][collision.Other.EntityId];
+            if (move.Direction) {
+                control.Direction[0] += move.Direction[0];
+                control.Direction[1] += move.Direction[1];
+            }
         }
         normalize(control.Direction, control.Direction);
     }
