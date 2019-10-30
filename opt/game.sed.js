@@ -332,43 +332,46 @@ update$1(game, i);
 }
 }
 function update$1(game, entity) {
+let control = game[2 /* ControlBall */][entity];
 let transform = game[8 /* Transform2D */][entity];
-let move = game[6 /* Move */][entity];
 let collide = game[1 /* Collide */][entity];
 if (transform.Translation[0] < 0) {
 transform.Translation[0] = 0;
-move.Direction[0] = -move.Direction[0];
+control.Direction[0] = -control.Direction[0];
 }
 if (transform.Translation[0] > game.ViewportWidth) {
 transform.Translation[0] = game.ViewportWidth;
-move.Direction[0] = -move.Direction[0];
+control.Direction[0] = -control.Direction[0];
 }
 if (transform.Translation[1] < 0) {
 transform.Translation[1] = 0;
-move.Direction[1] = -move.Direction[1];
+control.Direction[1] = -control.Direction[1];
 }
 if (transform.Translation[1] > game.ViewportHeight) {
 transform.Translation[1] = game.ViewportHeight;
-move.Direction[1] = -move.Direction[1];
+control.Direction[1] = -control.Direction[1];
 }
 if (collide.Collisions.length > 0) {
 let collision = collide.Collisions[0];
 if (collision.Hit[0]) {
 transform.Translation[0] += collision.Hit[0];
-let from_center = collide.Center[1] - collision.Other.Center[1];
-let other_half = collision.Other.Size[1] / 2;
-move.Direction[0] = -move.Direction[0];
-move.Direction[1] = from_center / other_half;
+control.Direction[0] = -control.Direction[0];
 }
 if (collision.Hit[1]) {
 transform.Translation[1] += collision.Hit[1];
-let from_center = collide.Center[0] - collision.Other.Center[0];
-let other_half = collision.Other.Size[0] / 2;
-move.Direction[0] = from_center / other_half;
-move.Direction[1] = -move.Direction[1];
+control.Direction[1] = -control.Direction[1];
 }
-normalize(move.Direction, move.Direction);
+if (game.World[collision.Other.EntityId] & 64 /* Move */) {
+let move = game[6 /* Move */][collision.Other.EntityId];
+if (move.Direction) {
+control.Direction[0] += move.Direction[0];
+control.Direction[1] += move.Direction[1];
 }
+}
+normalize(control.Direction, control.Direction);
+}
+let move = game[6 /* Move */][entity];
+move.Direction = control.Direction;
 }
 
 const QUERY$3 = 256 /* Transform2D */ | 8 /* ControlBrick */ | 2 /* Collide */;
@@ -386,7 +389,7 @@ game.Destroy(entity);
 }
 }
 
-const QUERY$4 = 256 /* Transform2D */ | 16 /* ControlPaddle */;
+const QUERY$4 = 256 /* Transform2D */ | 16 /* ControlPaddle */ | 64 /* Move */;
 function sys_control_paddle(game, delta) {
 for (let i = 0; i < game.World.length; i++) {
 if ((game.World[i] & QUERY$4) == QUERY$4) {
@@ -397,17 +400,24 @@ update$3(game, i);
 function update$3(game, entity) {
 let transform = game[8 /* Transform2D */][entity];
 let control = game[4 /* ControlPaddle */][entity];
-let x = transform.Translation[0] + game.InputEvent.mouse_x;
+let move = game[6 /* Move */][entity];
+let x = transform.Translation[0];
 if (x < control.Width / 2) {
 transform.Translation[0] = control.Width / 2;
+transform.Dirty = true;
 }
 else if (game.ViewportWidth - control.Width / 2 < x) {
 transform.Translation[0] = game.ViewportWidth - control.Width / 2;
+transform.Dirty = true;
 }
 else {
-transform.Translation[0] = x;
+if (game.InputState.ArrowLeft && !game.InputState.ArrowRight) {
+move.Direction = [-1, 0];
 }
-transform.Dirty = true;
+if (game.InputState.ArrowRight && !game.InputState.ArrowLeft) {
+move.Direction = [1, 0];
+}
+}
 }
 
 const QUERY$5 = 256 /* Transform2D */ | 32 /* Draw */;
@@ -452,11 +462,14 @@ update$4(game, i, delta);
 }
 }
 function update$4(game, entity, delta) {
-let transform = game[8 /* Transform2D */][entity];
 let move = game[6 /* Move */][entity];
+if (move.Direction) {
+let transform = game[8 /* Transform2D */][entity];
 transform.Translation[0] += move.Direction[0] * move.Speed * delta;
 transform.Translation[1] += move.Direction[1] * move.Speed * delta;
 transform.Dirty = true;
+move.Direction = undefined;
+}
 }
 
 function sys_performance(game, delta, target) {
@@ -668,10 +681,12 @@ Collisions: [],
 };
 }
 
-function control_ball() {
+function control_ball(angle) {
 return (game, entity) => {
 game.World[entity] |= 4 /* ControlBall */;
-game[2 /* ControlBall */][entity] = {};
+game[2 /* ControlBall */][entity] = {
+Direction: [Math.cos(angle), Math.sin(angle)],
+};
 };
 }
 
@@ -687,18 +702,22 @@ Color,
 };
 }
 
-function move(angle, Speed) {
+function move(Speed) {
 return (game, entity) => {
 game.World[entity] |= 64 /* Move */;
 game[6 /* Move */][entity] = {
-Direction: [Math.cos(angle), Math.sin(angle)],
 Speed,
 };
 };
 }
 
 let ball_blueprint = {
-Using: [control_ball(), move(1, 300), collide(true, [20, 20]), draw_rect$1(20, 20, "orange")],
+Using: [
+control_ball(-Math.random() * Math.PI),
+move(300),
+collide(true, [20, 20]),
+draw_rect$1(20, 20, "orange"),
+],
 };
 
 function control_brick() {
@@ -728,7 +747,7 @@ Width,
 }
 
 let paddle_blueprint = {
-Using: [control_paddle(100), collide(true, [100, 20]), draw_rect$1(100, 20, "red")],
+Using: [control_paddle(100), move(500), collide(true, [100, 20]), draw_rect$1(100, 20, "red")],
 };
 
 function world_stage(game) {

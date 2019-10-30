@@ -7,10 +7,13 @@ export function sys_move(game, delta) {
     }
 }
 function update(game, entity, delta) {
-    let transform = game[8 /* Transform2D */][entity];
     let move = game[6 /* Move */][entity];
-    transform.Translation[0] += move.Direction[0] * move.Speed * delta;
-    transform.Translation[1] += move.Direction[1] * move.Speed * delta;
-    transform.Dirty = true;
+    if (move.Direction) {
+        let transform = game[8 /* Transform2D */][entity];
+        transform.Translation[0] += move.Direction[0] * move.Speed * delta;
+        transform.Translation[1] += move.Direction[1] * move.Speed * delta;
+        transform.Dirty = true;
+        move.Direction = undefined;
+    }
 }
 //# sourceMappingURL=sys_move.js.map

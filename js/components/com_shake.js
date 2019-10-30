@@ -1,11 +1,9 @@
-/**
- * sys_shake modifies the transform of the entity. Add it to children only.
- */
-export function shake(Duration = 0) {
+export function shake(Duration = 0, Strength = 5) {
     return (game, entity) => {
-        game.World[entity] |= 64 /* Shake */;
-        game[6 /* Shake */][entity] = {
+        game.World[entity] |= 512 /* Shake */;
+        game[9 /* Shake */][entity] = {
             Duration,
+            Strength,
         };
     };
 }
