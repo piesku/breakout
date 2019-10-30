@@ -12,10 +12,12 @@ export function sys_move(game: Game, delta: number) {
 }
 
 function update(game: Game, entity: Entity, delta: number) {
-    let transform = game[Get.Transform2D][entity];
     let move = game[Get.Move][entity];
-
-    transform.Translation[0] += move.Direction[0] * move.Speed * delta;
-    transform.Translation[1] += move.Direction[1] * move.Speed * delta;
-    transform.Dirty = true;
+    if (move.Direction) {
+        let transform = game[Get.Transform2D][entity];
+        transform.Translation[0] += move.Direction[0] * move.Speed * delta;
+        transform.Translation[1] += move.Direction[1] * move.Speed * delta;
+        transform.Dirty = true;
+        move.Direction = undefined;
+    }
 }
