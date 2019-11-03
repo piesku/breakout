@@ -82,7 +82,6 @@ export class Game implements ComponentData {
         this.UI.addEventListener("wheel", evt => {
             this.InputEvent.wheel_y = evt.deltaY;
         });
-        this.UI.addEventListener("click", () => this.UI.requestPointerLock());
 
         let canvas2d = document.querySelector("canvas")! as HTMLCanvasElement;
         canvas2d.width = this.ViewportWidth;
