@@ -1,6 +1,5 @@
-import {DrawKind, DrawRect} from "../components/com_draw.js";
 import {Get, Has} from "../components/com_index.js";
-import {Game} from "../game.js";
+import {Entity, Game} from "../game.js";
 
 const QUERY = Has.Transform2D | Has.Draw;
 
@@ -20,17 +19,13 @@ export function sys_draw2d(game: Game, delta: number) {
                 transform.World[5]
             );
 
-            let draw = game[Get.Draw][i];
-            switch (draw.Kind) {
-                case DrawKind.Rect:
-                    draw_rect(game, draw);
-                    break;
-            }
+            draw_rect(game, i);
         }
     }
 }
 
-function draw_rect(game: Game, draw: DrawRect) {
+function draw_rect(game: Game, entity: Entity) {
+    let draw = game[Get.Draw][entity];
     game.Context2D.fillStyle = draw.Color;
     game.Context2D.fillRect(-draw.Width / 2, -draw.Height / 2, draw.Width, draw.Height);
 }
