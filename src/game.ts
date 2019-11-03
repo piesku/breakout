@@ -2,7 +2,6 @@ import {Collide} from "./components/com_collide.js";
 import {ControlPaddle} from "./components/com_control_paddle.js";
 import {Draw} from "./components/com_draw.js";
 import {ComponentData, Get, Has} from "./components/com_index.js";
-import {Named} from "./components/com_named.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
 import {Rad, Vec2} from "./math/index.js";
 import {sys_collide} from "./systems/sys_collide.js";
@@ -21,7 +20,6 @@ export class Game implements ComponentData {
     public [Get.Collide]: Array<Collide> = [];
     public [Get.ControlPaddle]: Array<ControlPaddle> = [];
     public [Get.Draw]: Array<Draw> = [];
-    public [Get.Named]: Array<Named> = [];
     public [Get.Transform2D]: Array<Transform2D> = [];
 
     public ViewportWidth = window.innerWidth;
