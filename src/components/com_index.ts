@@ -1,5 +1,4 @@
 import {Collide} from "./com_collide";
-import {ControlBall} from "./com_control_ball";
 import {ControlPaddle} from "./com_control_paddle";
 import {Draw} from "./com_draw";
 import {Move} from "./com_move";
@@ -8,7 +7,6 @@ import {Transform2D} from "./com_transform2d";
 
 export const enum Get {
     Collide,
-    ControlBall,
     ControlPaddle,
     Draw,
     Move,
@@ -18,7 +16,6 @@ export const enum Get {
 
 export interface ComponentData {
     [Get.Collide]: Array<Collide>;
-    [Get.ControlBall]: Array<ControlBall>;
     [Get.ControlPaddle]: Array<ControlPaddle>;
     [Get.Draw]: Array<Draw>;
     [Get.Move]: Array<Move>;
@@ -28,7 +25,6 @@ export interface ComponentData {
 
 export const enum Has {
     Collide = 1 << Get.Collide,
-    ControlBall = 1 << Get.ControlBall,
     ControlPaddle = 1 << Get.ControlPaddle,
     Draw = 1 << Get.Draw,
     Move = 1 << Get.Move,
