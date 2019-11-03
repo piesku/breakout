@@ -1,4 +1,3 @@
-import {GameState} from "./actions.js";
 import {Blueprint2D} from "./blueprints/blu_common.js";
 import {Collide} from "./components/com_collide.js";
 import {ControlBall} from "./components/com_control_ball.js";
@@ -9,7 +8,6 @@ import {ComponentData, Get, Has} from "./components/com_index.js";
 import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
-import {Vec4} from "./math/index.js";
 import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_ball} from "./systems/sys_control_ball.js";
 import {sys_control_brick} from "./systems/sys_control_brick.js";
@@ -19,7 +17,6 @@ import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_move} from "./systems/sys_move.js";
 import {sys_performance} from "./systems/sys_performance.js";
 import {sys_transform2d} from "./systems/sys_transform2d.js";
-import {sys_ui} from "./systems/sys_ui.js";
 
 const MAX_ENTITIES = 10000;
 
@@ -38,7 +35,7 @@ export interface InputEvent {
     wheel_y: number;
 }
 
-export class Game implements ComponentData, GameState {
+export class Game implements ComponentData {
     public World: Array<number> = [];
 
     // Implement ComponentData
@@ -57,9 +54,6 @@ export class Game implements ComponentData, GameState {
     public UI = document.querySelector("main")!;
     public InputState: InputState = {mouse_x: 0, mouse_y: 0};
     public InputEvent: InputEvent = {mouse_x: 0, mouse_y: 0, wheel_y: 0};
-
-    // Implement GameState
-    public ClearColor = <Vec4>[1, 0.3, 0.3, 1];
 
     private RAF: number = 0;
 
@@ -116,7 +110,6 @@ export class Game implements ComponentData, GameState {
         sys_transform2d(this, delta);
         sys_collide(this, delta);
         sys_draw2d(this, delta);
-        sys_ui(this, delta);
 
         // Performance.
         sys_framerate(this, delta);
