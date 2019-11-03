@@ -1,6 +1,5 @@
 import {GameState} from "./actions.js";
 import {Blueprint2D} from "./blueprints/blu_common.js";
-import {AudioSource} from "./components/com_audio_source.js";
 import {Collide} from "./components/com_collide.js";
 import {ControlBall} from "./components/com_control_ball.js";
 import {ControlBrick} from "./components/com_control_brick.js";
@@ -11,7 +10,6 @@ import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
 import {Vec4} from "./math/index.js";
-import {sys_audio} from "./systems/sys_audio.js";
 import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_ball} from "./systems/sys_control_ball.js";
 import {sys_control_brick} from "./systems/sys_control_brick.js";
@@ -44,7 +42,6 @@ export class Game implements ComponentData, GameState {
     public World: Array<number> = [];
 
     // Implement ComponentData
-    public [Get.AudioSource]: Array<AudioSource> = [];
     public [Get.Collide]: Array<Collide> = [];
     public [Get.ControlBall]: Array<ControlBall> = [];
     public [Get.ControlBrick]: Array<ControlBrick> = [];
@@ -58,7 +55,6 @@ export class Game implements ComponentData, GameState {
     public ViewportHeight = window.innerHeight;
     public Context2D: CanvasRenderingContext2D;
     public UI = document.querySelector("main")!;
-    public Audio: AudioContext = new AudioContext();
     public InputState: InputState = {mouse_x: 0, mouse_y: 0};
     public InputEvent: InputEvent = {mouse_x: 0, mouse_y: 0, wheel_y: 0};
 
@@ -119,7 +115,6 @@ export class Game implements ComponentData, GameState {
         sys_move(this, delta);
         sys_transform2d(this, delta);
         sys_collide(this, delta);
-        sys_audio(this, delta);
         sys_draw2d(this, delta);
         sys_ui(this, delta);
 
@@ -145,12 +140,10 @@ export class Game implements ComponentData, GameState {
         };
 
         this.Stop();
-        this.Audio.resume();
         tick(last);
     }
 
     Stop() {
-        this.Audio.suspend();
         cancelAnimationFrame(this.RAF);
     }
 
