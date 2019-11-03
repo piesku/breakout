@@ -2,7 +2,6 @@ import {Collide} from "./components/com_collide.js";
 import {ControlPaddle} from "./components/com_control_paddle.js";
 import {Draw} from "./components/com_draw.js";
 import {ComponentData, Get, Has} from "./components/com_index.js";
-import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
 import {Rad, Vec2} from "./math/index.js";
@@ -10,7 +9,6 @@ import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_paddle} from "./systems/sys_control_paddle.js";
 import {sys_draw2d} from "./systems/sys_draw2d.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
-import {sys_move} from "./systems/sys_move.js";
 import {sys_performance} from "./systems/sys_performance.js";
 import {sys_transform2d} from "./systems/sys_transform2d.js";
 
@@ -23,7 +21,6 @@ export class Game implements ComponentData {
     public [Get.Collide]: Array<Collide> = [];
     public [Get.ControlPaddle]: Array<ControlPaddle> = [];
     public [Get.Draw]: Array<Draw> = [];
-    public [Get.Move]: Array<Move> = [];
     public [Get.Named]: Array<Named> = [];
     public [Get.Transform2D]: Array<Transform2D> = [];
 
@@ -82,7 +79,6 @@ export class Game implements ComponentData {
         let now = performance.now();
 
         sys_control_paddle(this, delta);
-        sys_move(this, delta);
         sys_transform2d(this, delta);
         sys_collide(this, delta);
         sys_draw2d(this, delta);
