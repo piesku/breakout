@@ -11,12 +11,7 @@ export function world_stage(game: Game) {
 
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
-        Using: [
-            control_paddle(100),
-            move(500),
-            collide(true, [100, 20]),
-            draw_rect(100, 20, "red"),
-        ],
+        Using: [control_paddle(100), move(500), collide([100, 20]), draw_rect(100, 20, "red")],
     });
 
     game.Add({
@@ -24,7 +19,7 @@ export function world_stage(game: Game) {
         Using: [
             control_ball(-Math.random() * Math.PI),
             move(300),
-            collide(true, [20, 20]),
+            collide([20, 20]),
             draw_rect(20, 20, "orange"),
         ],
     });
@@ -46,7 +41,7 @@ export function world_stage(game: Game) {
                 Translation: [x, y],
                 Using: [
                     control_brick(),
-                    collide(false, [brick_width, brick_height]),
+                    collide([brick_width, brick_height]),
                     draw_rect(brick_width, brick_height, "green"),
                 ],
             });
