@@ -1,4 +1,3 @@
-import {Blueprint2D} from "./blueprints/blu_common.js";
 import {Collide} from "./components/com_collide.js";
 import {ControlBall} from "./components/com_control_ball.js";
 import {ControlBrick} from "./components/com_control_brick.js";
@@ -8,6 +7,7 @@ import {ComponentData, Get, Has} from "./components/com_index.js";
 import {Move} from "./components/com_move.js";
 import {Named} from "./components/com_named.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
+import {Rad, Vec2} from "./math/index.js";
 import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_ball} from "./systems/sys_control_ball.js";
 import {sys_control_brick} from "./systems/sys_control_brick.js";
@@ -19,21 +19,6 @@ import {sys_performance} from "./systems/sys_performance.js";
 import {sys_transform2d} from "./systems/sys_transform2d.js";
 
 const MAX_ENTITIES = 10000;
-
-export type Entity = number;
-
-export interface InputState {
-    [k: string]: number;
-    mouse_x: number;
-    mouse_y: number;
-}
-
-export interface InputEvent {
-    [k: string]: number;
-    mouse_x: number;
-    mouse_y: number;
-    wheel_y: number;
-}
 
 export class Game implements ComponentData {
     public World: Array<number> = [];
@@ -164,4 +149,27 @@ export class Game implements ComponentData {
         }
         this.World[entity] = 0;
     }
+}
+
+export type Entity = number;
+
+export interface InputState {
+    [k: string]: number;
+    mouse_x: number;
+    mouse_y: number;
+}
+
+export interface InputEvent {
+    [k: string]: number;
+    mouse_x: number;
+    mouse_y: number;
+    wheel_y: number;
+}
+
+export interface Blueprint2D {
+    Translation?: Vec2;
+    Rotation?: Rad;
+    Scale?: Vec2;
+    Using?: Array<(game: Game, entity: Entity) => void>;
+    Children?: Array<Blueprint2D>;
 }

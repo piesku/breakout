@@ -1,6 +1,9 @@
-import {ball_blueprint} from "../blueprints/blu_ball.js";
-import {create_brick} from "../blueprints/blu_brick.js";
-import {paddle_blueprint} from "../blueprints/blu_paddle.js";
+import {collide} from "../components/com_collide.js";
+import {control_ball} from "../components/com_control_ball.js";
+import {control_brick} from "../components/com_control_brick.js";
+import {control_paddle} from "../components/com_control_paddle.js";
+import {draw_rect} from "../components/com_draw.js";
+import {move} from "../components/com_move.js";
 import {Game} from "../game.js";
 
 export function world_stage(game: Game) {
@@ -8,12 +11,22 @@ export function world_stage(game: Game) {
 
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
-        ...paddle_blueprint,
+        Using: [
+            control_paddle(100),
+            move(500),
+            collide(true, [100, 20]),
+            draw_rect(100, 20, "red"),
+        ],
     });
 
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 100],
-        ...ball_blueprint,
+        Using: [
+            control_ball(-Math.random() * Math.PI),
+            move(300),
+            collide(true, [20, 20]),
+            draw_rect(20, 20, "orange"),
+        ],
     });
 
     let col_count = 5;
@@ -31,7 +44,11 @@ export function world_stage(game: Game) {
             let x = top_left_x + col * (brick_width + padding) + brick_width / 2;
             game.Add({
                 Translation: [x, y],
-                ...create_brick(brick_width, brick_height),
+                Using: [
+                    control_brick(),
+                    collide(false, [brick_width, brick_height]),
+                    draw_rect(brick_width, brick_height, "green"),
+                ],
             });
         }
     }
