@@ -13,9 +13,10 @@ export function sys_control_ball(game: Game, delta: number) {
 }
 
 function update(game: Game, entity: Entity) {
+    let control = game.World.ControlBall[entity];
     let move = game.World.Move[entity];
-    move.Direction[0] = 1;
-    move.Direction[1] = 1;
+    move.Direction[0] = control.Direction[0];
+    move.Direction[1] = control.Direction[1];
 
     normalize(move.Direction, move.Direction);
 }

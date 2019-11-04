@@ -15,6 +15,6 @@ export function scene_main(game: Game) {
 
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight / 2],
-        Using: [control_ball(), move(300), draw_rect(20, 20, "orange")],
+        Using: [control_ball(Math.random() * Math.PI * -1), move(300), draw_rect(20, 20, "orange")],
     });
 }
