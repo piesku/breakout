@@ -6,6 +6,7 @@ import {sys_control_ball} from "./systems/sys_control_ball.js";
 import {sys_control_paddle} from "./systems/sys_control_paddle.js";
 import {sys_draw2d} from "./systems/sys_draw2d.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
+import {sys_move} from "./systems/sys_move.js";
 import {sys_performance} from "./systems/sys_performance.js";
 import {sys_transform2d} from "./systems/sys_transform2d.js";
 import {World} from "./world.js";
@@ -72,6 +73,7 @@ export class Game {
 
         sys_control_paddle(this, delta);
         sys_control_ball(this, delta);
+        sys_move(this, delta);
         sys_transform2d(this, delta);
         sys_collide(this, delta);
         sys_draw2d(this, delta);
