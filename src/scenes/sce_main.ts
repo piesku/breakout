@@ -1,5 +1,6 @@
 import {collide} from "../components/com_collide.js";
 import {control_ball} from "../components/com_control_ball.js";
+import {control_brick} from "../components/com_control_brick.js";
 import {control_paddle} from "../components/com_control_paddle.js";
 import {draw_rect} from "../components/com_draw.js";
 import {move} from "../components/com_move.js";
@@ -40,6 +41,7 @@ export function scene_main(game: Game) {
             game.Add({
                 Translation: [x, y],
                 Using: [
+                    control_brick(),
                     collide([brick_width, brick_height]),
                     draw_rect(brick_width, brick_height, "green"),
                 ],

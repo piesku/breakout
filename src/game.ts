@@ -3,6 +3,7 @@ import {transform2d} from "./components/com_transform2d.js";
 import {Rad, Vec2} from "./math/index.js";
 import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_ball} from "./systems/sys_control_ball.js";
+import {sys_control_brick} from "./systems/sys_control_brick.js";
 import {sys_control_paddle} from "./systems/sys_control_paddle.js";
 import {sys_draw2d} from "./systems/sys_draw2d.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
@@ -73,6 +74,7 @@ export class Game {
 
         sys_control_paddle(this, delta);
         sys_control_ball(this, delta);
+        sys_control_brick(this, delta);
         sys_move(this, delta);
         sys_transform2d(this, delta);
         sys_collide(this, delta);
