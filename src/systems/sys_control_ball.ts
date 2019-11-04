@@ -38,7 +38,15 @@ function update(game: Game, entity: Entity) {
 
     let collide = game.World.Collide[entity];
     if (collide.Collisions.length > 0) {
-        console.log(entity);
+        let collision = collide.Collisions[0];
+        if (collision.Hit[0]) {
+            transform.Translation[0] += collision.Hit[0];
+            control.Direction[0] = -control.Direction[0];
+        }
+        if (collision.Hit[1]) {
+            transform.Translation[1] += collision.Hit[1];
+            control.Direction[1] = -control.Direction[1];
+        }
     }
 
     let move = game.World.Move[entity];
