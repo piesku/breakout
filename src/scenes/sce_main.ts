@@ -1,3 +1,4 @@
+import {collide} from "../components/com_collide.js";
 import {control_ball} from "../components/com_control_ball.js";
 import {control_paddle} from "../components/com_control_paddle.js";
 import {draw_rect} from "../components/com_draw.js";
@@ -19,6 +20,7 @@ export function scene_main(game: Game) {
             Using: [
                 control_ball(Math.random() * Math.PI * -1),
                 move(300),
+                collide([20, 20]),
                 draw_rect(20, 20, "orange"),
             ],
         });
