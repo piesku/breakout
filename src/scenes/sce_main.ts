@@ -8,6 +8,6 @@ export function scene_main(game: Game) {
 
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight / 2],
-        Using: [control_paddle(), draw_rect(100)],
+        Using: [control_paddle(), draw_rect(50, 50, "red")],
     });
 }
