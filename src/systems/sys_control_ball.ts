@@ -47,6 +47,11 @@ function update(game: Game, entity: Entity) {
             transform.Translation[1] += collision.Hit[1];
             control.Direction[1] = -control.Direction[1];
         }
+        if (game.World[collision.Other.EntityId] & Has.Move) {
+            let move = game[Get.Move][collision.Other.EntityId];
+            control.Direction[0] += move.Direction[0];
+            control.Direction[1] += move.Direction[1];
+        }
     }
 
     let move = game.World.Move[entity];
