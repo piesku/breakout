@@ -7,7 +7,12 @@ export function scene_main(game: Game) {
     game.World = new World();
 
     game.Add({
+        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
+        Using: [control_paddle(), draw_rect(100, 20, "red")],
+    });
+
+    game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight / 2],
-        Using: [control_paddle(), draw_rect(50, 50, "red")],
+        Using: [draw_rect(20, 20, "orange")],
     });
 }
