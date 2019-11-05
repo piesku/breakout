@@ -34,5 +34,6 @@ export function sys_draw2d(game: Game, delta: number) {
 function draw_rect(game: Game, draw: DrawRect) {
     game.Context2D.globalAlpha = draw.Alpha;
     game.Context2D.fillStyle = draw.Color;
+    game.Context2D.filter = draw.Filter;
     game.Context2D.fillRect(-draw.Width / 2, -draw.Height / 2, draw.Width, draw.Height);
 }
