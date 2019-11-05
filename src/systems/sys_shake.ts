@@ -23,10 +23,12 @@ function update(game: Game, entity: Entity, delta: number) {
             shake.Strength - Math.random() * (shake.Strength * 2),
         ];
         transform.Dirty = true;
-
+        game.ClearColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() *
+            255})`;
         if (shake.Duration <= 0) {
             shake.Duration = 0;
             transform.Translation = [0, 0];
+            game.ClearColor = `black`;
         }
     }
 }
