@@ -13,7 +13,18 @@ Luck](https://github.com/piesku/goodluck).
 
 ## Editor Setup
 
-For best experience, use VS Code with the Prettier extension.
+For best experience, use VS Code with the following extensions:
+
+- [Debugger for Chrome](https://code.visualstudio.com/blogs/2016/02/23/introducing-chrome-debugger-for-vs-code),
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+
+Rather than start the development server from your terminal, we recommend to
+start it from VS Code through `Terminal > Run build task…` or
+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>. VS Code will integrate the
+output of the TypeScript compilation into the editor window.
+
+Then run the project through `Debug > Start Debugging` or press <kbd>F5</kbd>.
+
 
 ## Following the Tutorial
 
