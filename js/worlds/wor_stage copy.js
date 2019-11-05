@@ -8,14 +8,19 @@ export function world_stage(game) {
     game.World = [];
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
-        Using: [control_paddle(100), move(500), collide([100, 20]), draw_rect(100, 20, "red")],
+        Using: [
+            control_paddle(100),
+            move(500),
+            collide(true, [100, 20]),
+            draw_rect(100, 20, "red"),
+        ],
     });
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 100],
         Using: [
             control_ball(-Math.random() * Math.PI),
             move(300),
-            collide([20, 20]),
+            collide(true, [20, 20]),
             draw_rect(20, 20, "orange"),
         ],
     });
@@ -34,11 +39,11 @@ export function world_stage(game) {
                 Translation: [x, y],
                 Using: [
                     control_brick(),
-                    collide([brick_width, brick_height]),
+                    collide(false, [brick_width, brick_height]),
                     draw_rect(brick_width, brick_height, "green"),
                 ],
             });
         }
     }
 }
-//# sourceMappingURL=wor_stage.js.map
+//# sourceMappingURL=wor_stage copy.js.map

@@ -1,32 +1,21 @@
 import { get_translation } from "../math/mat2d.js";
 import { negate } from "../math/vec2.js";
-const QUERY = 256 /* Transform2D */ | 2 /* Collide */;
+const QUERY = 64 /* Transform2D */ | 1 /* Collide */;
 export function sys_collide(game, delta) {
     // Collect all colliders.
-    let static_colliders = [];
-    let dynamic_colliders = [];
+    let all_colliders = [];
     for (let i = 0; i < game.World.length; i++) {
         if ((game.World[i] & QUERY) === QUERY) {
-            let transform = game[8 /* Transform2D */][i];
-            let collider = game[1 /* Collide */][i];
-            // Prepare the collider for this tick's detection.
+            let transform = game[6 /* Transform2D */][i];
+            let collider = game[0 /* Collide */][i];
+            // Prepare the collider for this tick.
             collider.Collisions = [];
-            if (collider.New) {
-                collider.New = false;
-                compute_aabb(transform, collider);
-            }
-            else if (collider.Dynamic) {
-                compute_aabb(transform, collider);
-                dynamic_colliders.push(collider);
-            }
-            else {
-                static_colliders.push(collider);
-            }
+            compute_aabb(transform, collider);
+            all_colliders.push(collider);
         }
     }
-    for (let i = 0; i < dynamic_colliders.length; i++) {
-        check_collisions(dynamic_colliders[i], static_colliders, static_colliders.length);
-        check_collisions(dynamic_colliders[i], dynamic_colliders, i);
+    for (let i = 0; i < all_colliders.length; i++) {
+        check_collisions(all_colliders[i], all_colliders);
     }
 }
 function compute_aabb(transform, collide) {
@@ -36,23 +25,10 @@ function compute_aabb(transform, collide) {
     collide.Max[0] = collide.Center[0] + collide.Size[0] / 2;
     collide.Max[1] = collide.Center[1] + collide.Size[1] / 2;
 }
-/**
- * Check for collisions between a dynamic collider and other colliders. Length
- * is used to control how many colliders to check against. For collisions
- * with static colliders, length should be equal to colliders.length, since
- * we want to consider all static colliders in the scene. For collisions with
- * other dynamic colliders, we only need to check a pair of colliders once.
- * Varying length allows to skip half of the NxN checks matrix.
- *
- * @param game The game instance.
- * @param collider The current collider.
- * @param colliders Other colliders to test against.
- * @param length How many colliders to check.
- */
-function check_collisions(collider, colliders, length) {
-    for (let i = 0; i < length; i++) {
+function check_collisions(collider, colliders) {
+    for (let i = 0; i < colliders.length; i++) {
         let other = colliders[i];
-        if (intersect_aabb(collider, other)) {
+        if (other !== collider && intersect_aabb(collider, other)) {
             let hit = penetrate_aabb(collider, other);
             collider.Collisions.push({
                 Other: other,

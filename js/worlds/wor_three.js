@@ -4,16 +4,16 @@ import { control_brick } from "../components/com_control_brick.js";
 import { control_paddle } from "../components/com_control_paddle.js";
 import { draw_rect } from "../components/com_draw.js";
 import { move } from "../components/com_move.js";
-export function world_stage(game) {
+export function world_three(game) {
     game.World = [];
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight - 20],
-        Using: [control_paddle(100), move(500), collide([100, 20]), draw_rect(100, 20, "red")],
+        Using: [control_paddle(), move(500), collide([100, 20]), draw_rect(100, 20, "red")],
     });
     game.Add({
-        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 100],
+        Translation: [game.ViewportWidth / 2, game.ViewportHeight - 50],
         Using: [
-            control_ball(-Math.random() * Math.PI),
+            control_ball(Math.random() * Math.PI * -1),
             move(300),
             collide([20, 20]),
             draw_rect(20, 20, "orange"),
@@ -25,7 +25,7 @@ export function world_stage(game) {
     let brick_height = 20;
     let padding = 10;
     let top_left_x = (game.ViewportWidth - brick_width * col_count - padding * (col_count - 1)) / 2;
-    let top_left_y = 100;
+    let top_left_y = 50;
     for (let row = 0; row < row_count; row++) {
         let y = top_left_y + row * (brick_height + padding) + brick_height / 2;
         for (let col = 0; col < col_count; col++) {
@@ -41,4 +41,4 @@ export function world_stage(game) {
         }
     }
 }
-//# sourceMappingURL=wor_stage.js.map
+//# sourceMappingURL=wor_three.js.map

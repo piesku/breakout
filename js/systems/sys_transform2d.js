@@ -1,9 +1,9 @@
 import { from_translation, invert, multiply, rotate, scale } from "../math/mat2d.js";
-const QUERY = 256 /* Transform2D */;
+const QUERY = 64 /* Transform2D */;
 export function sys_transform2d(game, delta) {
     for (let i = 0; i < game.World.length; i++) {
         if ((game.World[i] & QUERY) === QUERY) {
-            update(game[8 /* Transform2D */][i]);
+            update(game[6 /* Transform2D */][i]);
         }
     }
 }

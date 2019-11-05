@@ -1,11 +1,8 @@
-import { dispatch } from "./actions.js";
 import { Game } from "./game.js";
-import { world_stage } from "./worlds/wor_stage.js";
+import { world_three } from "./worlds/wor_three.js";
 let game = new Game();
-world_stage(game);
+world_three(game);
 game.Start();
-// @ts-ignore
-window.$ = (...args) => dispatch(game, ...args);
 // @ts-ignore
 window.game = game;
 //# sourceMappingURL=index.js.map

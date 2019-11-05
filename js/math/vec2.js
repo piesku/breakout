@@ -1,3 +1,18 @@
+export function add(out, a, b) {
+    out[0] = a[0] + b[0];
+    out[1] = a[1] + b[1];
+    return out;
+}
+export function subtract(out, a, b) {
+    out[0] = a[0] - b[0];
+    out[1] = a[1] - b[1];
+    return out;
+}
+export function scale(out, a, b) {
+    out[0] = a[0] * b;
+    out[1] = a[1] * b;
+    return out;
+}
 export function length(a) {
     return Math.hypot(a[0], a[1]);
 }

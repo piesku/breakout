@@ -1,10 +1,8 @@
-export function collide(Dynamic = true, Size) {
+export function collide(Size) {
     return (game, EntityId) => {
-        game.World[EntityId] |= 2 /* Collide */;
-        game[1 /* Collide */][EntityId] = {
+        game.World[EntityId] |= 1 /* Collide */;
+        game[0 /* Collide */][EntityId] = {
             EntityId,
-            New: true,
-            Dynamic,
             Size,
             Min: [0, 0],
             Max: [0, 0],

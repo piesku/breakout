@@ -1,7 +1,7 @@
 export function control_ball(angle) {
     return (game, entity) => {
-        game.World[entity] |= 4 /* ControlBall */;
-        game[2 /* ControlBall */][entity] = {
+        game.World[entity] |= 2 /* ControlBall */;
+        game[1 /* ControlBall */][entity] = {
             Direction: [Math.cos(angle), Math.sin(angle)],
         };
     };
