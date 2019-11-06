@@ -2,7 +2,7 @@ import {control_paddle} from "../components/com_control_paddle.js";
 import {draw_rect} from "../components/com_draw.js";
 import {Game} from "../game.js";
 
-export function world_one(game: Game) {
+export function world_main(game: Game) {
     game.World = [];
 
     game.Add({
