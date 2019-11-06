@@ -28,6 +28,7 @@ export class Game implements ComponentData {
     public UI = document.querySelector("main")!;
     public InputState: InputState = {mouse_x: 0, mouse_y: 0};
     public InputEvent: InputEvent = {mouse_x: 0, mouse_y: 0, wheel_y: 0};
+    public ClearColor = "#fff";
 
     private RAF: number = 0;
 
