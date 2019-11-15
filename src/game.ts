@@ -1,5 +1,4 @@
 import {Collide} from "./components/com_collide.js";
-import {ControlPaddle} from "./components/com_control_paddle.js";
 import {Draw} from "./components/com_draw.js";
 import {ComponentData, Get, Has} from "./components/com_index.js";
 import {Transform2D, transform2d} from "./components/com_transform2d.js";
@@ -18,7 +17,6 @@ export class Game implements ComponentData {
 
     // Implement ComponentData
     public [Get.Collide]: Array<Collide> = [];
-    public [Get.ControlPaddle]: Array<ControlPaddle> = [];
     public [Get.Draw]: Array<Draw> = [];
     public [Get.Transform2D]: Array<Transform2D> = [];
 
