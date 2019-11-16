@@ -1,3 +1,4 @@
+import {get_ball_blueprint} from "../blueprints/blu_ball.js";
 import {get_blu_explosion} from "../blueprints/blu_explosion.js";
 import {get_blu_tail} from "../blueprints/blu_tail.js";
 import {Get, Has} from "../components/com_index.js";
@@ -89,6 +90,15 @@ function update(game: Game, entity: Entity) {
         game.Add(
             get_blu_explosion(transform.Translation[0], transform.Translation[1], "white", 15)
         );
+
+        if (Math.random() > 0.95) {
+            let child = game.Add({
+                ...get_ball_blueprint(game),
+                Translation: [transform.Translation[0], transform.Translation[1]],
+            });
+            game[Get.Transform2D][game.Camera].Children.push(game[Get.Transform2D][child]);
+            game[Get.Transform2D][child].Parent = game[Get.Transform2D][game.Camera];
+        }
     }
 
     let angle = Math.atan(move.Direction[1] / move.Direction[0]);

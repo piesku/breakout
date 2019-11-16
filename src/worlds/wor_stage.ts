@@ -41,10 +41,4 @@ export function world_stage(game: Game) {
             ...bricks,
         ],
     });
-
-    // setInterval(() => {
-    //     let child = game.Add(get_ball_blueprint(game));
-    //     game[Get.Transform2D][game.Camera].Children.push(game[Get.Transform2D][child]);
-    //     game[Get.Transform2D][child].Parent = game[Get.Transform2D][game.Camera];
-    // }, 1000);
 }
