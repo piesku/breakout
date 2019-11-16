@@ -10,6 +10,8 @@ export interface AudioSource {
     Idle?: AudioClip;
     /** Elapsed time since the last clip change. */
     Time: number;
+    /** Detune the track by this many half tones. */
+    HalfTones: number;
 }
 
 /**
@@ -23,6 +25,7 @@ export function audio_source(idle?: AudioClip) {
         game[Get.AudioSource][entity] = <AudioSource>{
             Idle: idle,
             Time: 0,
+            HalfTones: 0,
         };
     };
 }

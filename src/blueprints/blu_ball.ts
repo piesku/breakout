@@ -1,3 +1,4 @@
+import {audio_source} from "../components/com_audio_source.js";
 import {collide} from "../components/com_collide.js";
 import {control_ball} from "../components/com_control_ball.js";
 import {draw_rect} from "../components/com_draw.js";
@@ -16,6 +17,7 @@ export let get_ball_blueprint = function(game: Game) {
             move(Math.PI * 1.75, 500),
             collide(true, [20, 20]),
             draw_rect(20, 20, "orange"),
+            audio_source(),
         ],
     };
 };

@@ -24,7 +24,12 @@ function update(game: Game, entity: Entity, delta: number) {
         for (let track of audio_source.Trigger.Tracks) {
             for (let i = 0; i < track.Notes.length; i++) {
                 if (track.Notes[i]) {
-                    play_note(game.Audio, track.Instrument, track.Notes[i], i * interval);
+                    play_note(
+                        game.Audio,
+                        track.Instrument,
+                        track.Notes[i] + audio_source.HalfTones,
+                        i * interval
+                    );
                 }
             }
         }
