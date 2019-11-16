@@ -4,17 +4,17 @@ export let snd_bounce_paddle = <AudioClip>{
     Tracks: [
         {
             Instrument: [
-                8,
+                4,
                 "lowpass",
-                8,
-                8,
+                11,
+                4,
                 false,
                 false,
                 8,
-                8,
-                [["sine", 8, 2, 2, 3, 8, false, false, 8, 8, 8], [false, 5, 1, 2, 6]],
+                3,
+                [["triangle", 8, 1, 2, 9, 8, false, true, 0, 2, 10], [false, 5, 1, 1, 4]],
             ],
-            Notes: [65],
+            Notes: [69],
         },
     ],
     Exit: 0,
