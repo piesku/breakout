@@ -90,8 +90,14 @@ function update(game: Game, entity: Entity) {
             get_blu_explosion(transform.Translation[0], transform.Translation[1], "white", 15)
         );
     }
+
+    let angle = Math.atan(move.Direction[1] / move.Direction[0]);
+
+    transform.Rotation = angle;
+
     game.Add({
         ...get_blu_tail(20, 20, "orange"),
         Translation: [...transform.Translation] as [number, number],
+        Rotation: angle,
     });
 }
