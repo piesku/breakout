@@ -1,6 +1,6 @@
 import {Entity, Game} from "../game.js";
 import {Vec2} from "../math/index.js";
-import {Get, Has} from "./com_index.js";
+import {Has} from "./com_index.js";
 
 export interface Collide {
     readonly EntityId: Entity;
@@ -18,8 +18,8 @@ export interface Collide {
 
 export function collide(Size: [number, number]) {
     return (game: Game, EntityId: Entity) => {
-        game.World[EntityId] |= Has.Collide;
-        game[Get.Collide][EntityId] = <Collide>{
+        game.World.Mask[EntityId] |= Has.Collide;
+        game.World.Collide[EntityId] = <Collide>{
             EntityId,
             Size,
             Min: [0, 0],

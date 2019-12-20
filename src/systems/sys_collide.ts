@@ -1,5 +1,5 @@
 import {Collide} from "../components/com_collide.js";
-import {Get, Has} from "../components/com_index.js";
+import {Has} from "../components/com_index.js";
 import {Transform2D} from "../components/com_transform2d.js";
 import {Game} from "../game.js";
 import {Vec2} from "../math/index.js";
@@ -9,10 +9,10 @@ const QUERY = Has.Transform2D | Has.Collide;
 export function sys_collide(game: Game, delta: number) {
     // Collect all colliders.
     let all_colliders: Collide[] = [];
-    for (let i = 0; i < game.World.length; i++) {
-        if ((game.World[i] & QUERY) === QUERY) {
-            let transform = game[Get.Transform2D][i];
-            let collider = game[Get.Collide][i];
+    for (let i = 0; i < game.World.Mask.length; i++) {
+        if ((game.World.Mask[i] & QUERY) === QUERY) {
+            let transform = game.World.Transform2D[i];
+            let collider = game.World.Collide[i];
 
             // Prepare the collider for this tick.
             collider.Collisions = [];

@@ -1,23 +1,13 @@
-import {Collide} from "./com_collide";
-import {Draw} from "./com_draw";
-import {Transform2D} from "./com_transform2d";
-
-export const enum Get {
+const enum Component {
     Collide,
     ControlPaddle,
     Draw,
     Transform2D,
 }
 
-export interface ComponentData {
-    [Get.Collide]: Array<Collide>;
-    [Get.Draw]: Array<Draw>;
-    [Get.Transform2D]: Array<Transform2D>;
-}
-
 export const enum Has {
-    Collide = 1 << Get.Collide,
-    ControlPaddle = 1 << Get.ControlPaddle,
-    Draw = 1 << Get.Draw,
-    Transform2D = 1 << Get.Transform2D,
+    Collide = 1 << Component.Collide,
+    ControlPaddle = 1 << Component.ControlPaddle,
+    Draw = 1 << Component.Draw,
+    Transform2D = 1 << Component.Transform2D,
 }

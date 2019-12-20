@@ -1,7 +1,5 @@
-import {Collide} from "./components/com_collide.js";
-import {Draw} from "./components/com_draw.js";
-import {ComponentData, Get, Has} from "./components/com_index.js";
-import {Transform2D, transform2d} from "./components/com_transform2d.js";
+import {Has} from "./components/com_index.js";
+import {transform2d} from "./components/com_transform2d.js";
 import {Rad, Vec2} from "./math/index.js";
 import {sys_collide} from "./systems/sys_collide.js";
 import {sys_control_paddle} from "./systems/sys_control_paddle.js";
@@ -9,16 +7,12 @@ import {sys_draw2d} from "./systems/sys_draw2d.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_performance} from "./systems/sys_performance.js";
 import {sys_transform2d} from "./systems/sys_transform2d.js";
+import {World} from "./world.js";
 
 const MAX_ENTITIES = 10000;
 
-export class Game implements ComponentData {
-    public World: Array<number> = [];
-
-    // Implement ComponentData
-    public [Get.Collide]: Array<Collide> = [];
-    public [Get.Draw]: Array<Draw> = [];
-    public [Get.Transform2D]: Array<Transform2D> = [];
+export class Game {
+    public World = new World();
 
     public ViewportWidth = window.innerWidth;
     public ViewportHeight = window.innerHeight;
@@ -64,8 +58,8 @@ export class Game implements ComponentData {
 
     CreateEntity(mask: number = 0) {
         for (let i = 0; i < MAX_ENTITIES; i++) {
-            if (!this.World[i]) {
-                this.World[i] = mask;
+            if (!this.World.Mask[i]) {
+                this.World.Mask[i] = mask;
                 return i;
             }
         }
@@ -115,10 +109,10 @@ export class Game implements ComponentData {
         for (let mixin of Using) {
             mixin(this, entity);
         }
-        let entity_transform = this[Get.Transform2D][entity];
+        let entity_transform = this.World.Transform2D[entity];
         for (let subtree of Children) {
             let child = this.Add(subtree);
-            let child_transform = this[Get.Transform2D][child];
+            let child_transform = this.World.Transform2D[child];
             child_transform.Parent = entity_transform;
             entity_transform.Children.push(child_transform);
         }
@@ -126,13 +120,13 @@ export class Game implements ComponentData {
     }
 
     Destroy(entity: Entity) {
-        let mask = this.World[entity];
+        let mask = this.World.Mask[entity];
         if (mask & Has.Transform2D) {
-            for (let child of this[Get.Transform2D][entity].Children) {
+            for (let child of this.World.Transform2D[entity].Children) {
                 this.Destroy(child.EntityId);
             }
         }
-        this.World[entity] = 0;
+        this.World.Mask[entity] = 0;
     }
 }
 

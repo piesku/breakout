@@ -1,9 +1,10 @@
 import {control_paddle} from "../components/com_control_paddle.js";
 import {draw_rect} from "../components/com_draw.js";
 import {Game} from "../game.js";
+import {World} from "../world.js";
 
 export function world_main(game: Game) {
-    game.World = [];
+    game.World = new World();
 
     game.Add({
         Translation: [game.ViewportWidth / 2, game.ViewportHeight / 2],

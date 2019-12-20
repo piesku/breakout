@@ -1,4 +1,4 @@
-import {Get, Has} from "../components/com_index.js";
+import {Has} from "../components/com_index.js";
 import {Entity, Game} from "../game.js";
 
 const QUERY = Has.Transform2D | Has.Draw;
@@ -8,9 +8,9 @@ export function sys_draw2d(game: Game, delta: number) {
     game.Context2D.fillStyle = game.ClearColor;
     game.Context2D.fillRect(0, 0, game.ViewportWidth, game.ViewportHeight);
 
-    for (let i = 0; i < game.World.length; i++) {
-        if ((game.World[i] & QUERY) == QUERY) {
-            let transform = game[Get.Transform2D][i];
+    for (let i = 0; i < game.World.Mask.length; i++) {
+        if ((game.World.Mask[i] & QUERY) == QUERY) {
+            let transform = game.World.Transform2D[i];
             game.Context2D.setTransform(
                 transform.World[0],
                 transform.World[1],
@@ -26,7 +26,7 @@ export function sys_draw2d(game: Game, delta: number) {
 }
 
 function draw_rect(game: Game, entity: Entity) {
-    let draw = game[Get.Draw][entity];
+    let draw = game.World.Draw[entity];
     game.Context2D.fillStyle = "red";
     game.Context2D.fillRect(-draw.Size / 2, -draw.Size / 2, draw.Size, draw.Size);
 }
