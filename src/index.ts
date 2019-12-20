@@ -1,8 +1,8 @@
 import {Game} from "./game.js";
-import {world_main} from "./worlds/wor_main.js";
+import {scene_main} from "./scenes/sce_main.js";
 
 let game = new Game();
-world_main(game);
+scene_main(game);
 game.Start();
 
 // @ts-ignore

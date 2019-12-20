@@ -3,7 +3,7 @@ import {draw_rect} from "../components/com_draw.js";
 import {Game} from "../game.js";
 import {World} from "../world.js";
 
-export function world_main(game: Game) {
+export function scene_main(game: Game) {
     game.World = new World();
 
     game.Add({
