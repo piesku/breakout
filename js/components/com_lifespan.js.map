@@ -1,1 +1,0 @@
-{"version":3,"file":"com_lifespan.js","sourceRoot":"","sources":["../../../src/components/com_lifespan.ts"],"names":[],"mappings":"AAQA,MAAM,UAAU,QAAQ,CAAC,GAAG,GAAG,QAAQ;IACnC,OAAO,CAAC,IAAU,EAAE,MAAc,EAAE,EAAE;QAClC,IAAI,CAAC,KAAK,CAAC,MAAM,CAAC,oBAAgB,CAAC;QACnC,IAAI,kBAAc,CAAC,MAAM,CAAC,GAAa;YACnC,GAAG;YACH,GAAG,EAAE,CAAC;SACT,CAAC;IACN,CAAC,CAAC;AACN,CAAC"}
